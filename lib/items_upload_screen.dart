@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class ItemsUploadScreen extends StatefulWidget
 {
@@ -43,15 +44,18 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: ()
-            {
+          Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: IconButton(
+              onPressed: ()
+              {
 
-            },
-            icon: const Icon(
-              Icons.cloud_upload,
-              color: Colors.teal,
-              size: 40,
+              },
+              icon: const Icon(
+                Icons.cloud_upload,
+                color: Colors.teal,
+                size: 35,
+              ),
             ),
           ),
         ],
@@ -206,8 +210,170 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
       ),
     );
   }
+
+  //default screen
+  Widget defaultScreen()
+  {
+    return Scaffold (
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: const Text(
+          "Upload New Item",
+          style: TextStyle(
+            color: Colors.teal,
+          ),
+        ),
+        centerTitle: true,
+      ),
+      body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+
+            const Padding(
+              padding: EdgeInsets.all(4.0),
+              child: Icon(
+                Icons.add_photo_alternate,
+                color: Colors.teal,
+                size: 110,
+
+              ),
+            ),
+
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: ElevatedButton(
+                onPressed: ()
+                {
+                    showDialogBox();
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.teal,
+                ),
+                child: const Text(
+                  "Add New Item",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  showDialogBox(){
+    return showDialog(
+      context: context,
+      builder: (c){
+        return SimpleDialog(
+          backgroundColor: Colors.teal,
+          title: const Text(
+            "Item Image",
+            style: TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          children: [
+
+            SimpleDialogOption(
+              onPressed: (){
+                captureImageWithPhoneCamera();
+              },
+              child: const Text(
+                "Take a photo from Camera",
+                style: TextStyle(
+                  color: Colors.white,
+                )
+              ),
+            ),
+
+            SimpleDialogOption(
+              onPressed: (){
+                chooseImageFromPhoneGallery();
+              },
+              child: const Text(
+                  "Choose image from Gallery",
+                  style: TextStyle(
+                    color: Colors.white,
+                  )
+              ),
+            ),
+
+            SimpleDialogOption(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              child: const Text(
+                  "Cancel",
+                  style: TextStyle(
+                    color: Colors.white,
+                  )
+              ),
+            ),
+          ],
+        );
+      }
+    );
+  }
+
+  captureImageWithPhoneCamera() async
+  {
+    Navigator.pop(context);
+    try{
+      final pickedImage = await ImagePicker().pickImage(source: ImageSource.camera);
+      if(pickedImage != null){
+        String imagePath = pickedImage.path;
+        imageFileUint8List = await pickedImage.readAsBytes();
+
+        //remove background from image
+        //make image transparent
+
+        setState(() {
+          imageFileUint8List;
+        });
+      }
+    }
+    catch(errorMsg){
+        print(errorMsg.toString());
+
+        setState(() {
+          imageFileUint8List = null;
+        });
+    }
+  }
+
+  chooseImageFromPhoneGallery() async
+  {
+    Navigator.pop(context);
+    try{
+      final pickedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if(pickedImage != null){
+        String imagePath = pickedImage.path;
+        imageFileUint8List = await pickedImage.readAsBytes();
+
+        //remove background from image
+        //make image transparent
+
+        setState(() {
+          imageFileUint8List;
+        });
+      }
+    }
+    catch(errorMsg){
+      print(errorMsg.toString());
+
+      setState(() {
+        imageFileUint8List = null;
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
-    return uploadFormScreen();
+    return imageFileUint8List == null ? defaultScreen() : uploadFormScreen();
   }
 }
