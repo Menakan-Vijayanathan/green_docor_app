@@ -81,9 +81,113 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
               child: TextField(
                 style: const TextStyle(color: Colors.teal),
                 controller: sellerNameTextEditingController,
-                decoration: const In,
+                decoration: const InputDecoration(
+                  hintText: "Seller name",
+                  hintStyle: TextStyle(color: Colors.teal),
+                  border: InputBorder.none,
+                ),
               ),
             ),
+          ),
+          const Divider(
+            color: Colors.blueGrey,
+            thickness: 1,
+          ),
+
+          //seller phone
+          ListTile(
+            leading: const Icon(
+              Icons.phone_android_rounded,
+              color: Colors.teal,
+            ),
+            title: SizedBox(
+              width: 250,
+              child: TextField(
+                style: const TextStyle(color: Colors.teal),
+                controller: sellerPhoneTextEditingController,
+                decoration: const InputDecoration(
+                  hintText: "Seller phone",
+                  hintStyle: TextStyle(color: Colors.teal),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          const Divider(
+            color: Colors.blueGrey,
+            thickness: 1,
+          ),
+
+          //item name
+          ListTile(
+            leading: const Icon(
+              Icons.title,
+              color: Colors.teal,
+            ),
+            title: SizedBox(
+              width: 250,
+              child: TextField(
+                style: const TextStyle(color: Colors.teal),
+                controller: itemNameTextEditingController,
+                decoration: const InputDecoration(
+                  hintText: "Item name",
+                  hintStyle: TextStyle(color: Colors.teal),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          const Divider(
+            color: Colors.blueGrey,
+            thickness: 1,
+          ),
+
+          //item description
+          ListTile(
+            leading: const Icon(
+              Icons.description,
+              color: Colors.teal,
+            ),
+            title: SizedBox(
+              width: 250,
+              child: TextField(
+                style: const TextStyle(color: Colors.teal),
+                controller: itemDescriptionTextEditingController,
+                decoration: const InputDecoration(
+                  hintText: "item description",
+                  hintStyle: TextStyle(color: Colors.teal),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          const Divider(
+            color: Colors.blueGrey,
+            thickness: 1,
+          ),
+
+          //item price
+          ListTile(
+            leading: const Icon(
+              Icons.price_change,
+              color: Colors.teal,
+            ),
+            title: SizedBox(
+              width: 250,
+              child: TextField(
+                style: const TextStyle(color: Colors.teal),
+                controller: itemPriceTextEditingController,
+                decoration: const InputDecoration(
+                  hintText: "Item price",
+                  hintStyle: TextStyle(color: Colors.teal),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
+          ),
+          const Divider(
+            color: Colors.blueGrey,
+            thickness: 1,
           ),
         ],
       ),
