@@ -42,6 +42,19 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
             color: Colors.teal,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: ()
+            {
+
+            },
+            icon: const Icon(
+              Icons.cloud_upload,
+              color: Colors.teal,
+              size: 40,
+            ),
+          ),
+        ],
       ),
       body: ListView(
         children: [
