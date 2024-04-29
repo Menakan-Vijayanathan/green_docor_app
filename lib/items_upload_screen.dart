@@ -1,7 +1,13 @@
 import 'dart:typed_data';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:green_docor_app/api_consumer.dart';
+import 'package:green_docor_app/home_screen.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:firebase_storage/firebase_storage.dart' as fStorage;
+
 
 class ItemsUploadScreen extends StatefulWidget
 {
@@ -19,6 +25,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
   TextEditingController itemPriceTextEditingController = TextEditingController();
 
   bool isUploading = false;
+  String downloadUrlOfUploadedImage = "";
 
   //upload form screen
   Widget uploadFormScreen()
@@ -49,6 +56,11 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
             child: IconButton(
               onPressed: ()
               {
+                  //validate upload from fields
+                if (isUploading != true)
+                {
+                  validateUploadFromAndUploadItemInfo();
+                }
 
               },
               icon: const Icon(
@@ -211,6 +223,77 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
     );
   }
 
+  validateUploadFromAndUploadItemInfo()
+  async {
+      if(imageFileUint8List != null)
+      {
+          if(sellerNameTextEditingController.text.isNotEmpty
+              && sellerPhoneTextEditingController.text.isNotEmpty
+              && itemNameTextEditingController.text.isNotEmpty
+              && itemDescriptionTextEditingController.text.isNotEmpty
+              && itemPriceTextEditingController.text.isNotEmpty)
+          {
+            setState(() {
+              isUploading = true;
+            });
+
+            //Upload image to cloud storage
+            String imageUniqueName = DateTime.now().microsecondsSinceEpoch.toString();
+
+            fStorage.Reference firebaseStorageRef = fStorage.FirebaseStorage.instance.ref()
+                .child("Items Image")
+                .child(imageUniqueName);
+
+            fStorage.UploadTask uploadTaskImageFile = firebaseStorageRef.putData(imageFileUint8List!);
+
+            fStorage.TaskSnapshot taskSnapshot = await uploadTaskImageFile.whenComplete(() {});
+            await taskSnapshot.ref.getDownloadURL().then((imageDownloadUrl)
+            {
+              downloadUrlOfUploadedImage = imageDownloadUrl;
+            });
+
+            // save item info to firestore
+            saveItemInfoToFirebase();
+
+          }
+          else
+          {
+            Fluttertoast.showToast(msg: "Please complete upload form. Every field is mandatory");
+          }
+      }
+      else
+      {
+        Fluttertoast.showToast(msg: "Please select image file.");
+      }
+  }
+
+  saveItemInfoToFirebase()
+  {
+    String itemUniqueId = DateTime.now().microsecondsSinceEpoch.toString();
+    FirebaseFirestore.instance.collection("items")
+        .doc(itemUniqueId)
+        .set(
+        {
+          "itemID": itemUniqueId,
+          "itemName": itemNameTextEditingController.text,
+          "itemDescription": itemDescriptionTextEditingController.text,
+          "itemImage": downloadUrlOfUploadedImage,
+          "itemPrice": itemPriceTextEditingController.text,
+          "sellerName": sellerNameTextEditingController.text,
+          "sellerPhone":sellerPhoneTextEditingController.text,
+          "publishedDate": DateTime.now(),
+          "status": "available",
+        });
+    Fluttertoast.showToast(msg: "Your New item uploaded successfully.");
+
+    setState(() {
+      isUploading = false;
+      imageFileUint8List = null;
+    });
+
+    Navigator.push(context, MaterialPageRoute(builder: (c)=> const HomeScreen()));
+  }
+
   //default screen
   Widget defaultScreen()
   {
@@ -332,6 +415,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
 
         //remove background from image
         //make image transparent
+         imageFileUint8List = await ApiConsumer().removeImageBackgroundApi(imagePath);
 
         setState(() {
           imageFileUint8List;
@@ -358,6 +442,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
 
         //remove background from image
         //make image transparent
+        imageFileUint8List = await ApiConsumer().removeImageBackgroundApi(imagePath);
 
         setState(() {
           imageFileUint8List;
