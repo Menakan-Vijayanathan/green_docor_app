@@ -237,7 +237,7 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
               isUploading = true;
             });
 
-            //Upload image to cloud storage
+            //Upload image to firebase storage
             String imageUniqueName = DateTime.now().microsecondsSinceEpoch.toString();
 
             fStorage.Reference firebaseStorageRef = fStorage.FirebaseStorage.instance.ref()
