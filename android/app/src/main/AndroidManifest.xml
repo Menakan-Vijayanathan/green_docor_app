@@ -1,6 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.detech_dev.greendocorapp">
     <application
-        android:label="green_docor_app"
+        android:label="greendocorapp"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

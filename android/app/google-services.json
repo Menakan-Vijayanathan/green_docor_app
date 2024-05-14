@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "726840721327",
-    "project_id": "green-decor-app",
-    "storage_bucket": "green-decor-app.appspot.com"
+    "project_number": "721203127607",
+    "project_id": "ar-green",
+    "storage_bucket": "ar-green.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:726840721327:android:7b28944a818b032550395a",
+        "mobilesdk_app_id": "1:721203127607:android:8bb63f2052e2f75ef2e6b2",
         "android_client_info": {
           "package_name": "com.detech_dev.greendocorapp"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCWo7U869j3_tgKgEHIPpe084lbD0BfX80"
+          "current_key": "AIzaSyDGW4_y02UaiJGpW-4phlNvIPcrp7WIGvs"
         }
       ],
       "services": {

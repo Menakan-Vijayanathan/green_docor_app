@@ -34,7 +34,7 @@ class _ItemUIDesignWidgetState extends State<ItemUIDesignWidget>
       child: Padding(
         padding: const EdgeInsets.all(6.0),
         child: SizedBox(
-          height: 140,
+          height: 180,
           width: MediaQuery.of(context).size.width,
           child: Row(
             children: [
@@ -66,9 +66,6 @@ class _ItemUIDesignWidgetState extends State<ItemUIDesignWidget>
                           ),
                       ),
 
-                      const SizedBox(
-                        height: 5.0,
-                      ),
 
                       //Seller name
                       Expanded(
@@ -82,9 +79,7 @@ class _ItemUIDesignWidgetState extends State<ItemUIDesignWidget>
                         ),
                       ),
 
-                      const SizedBox(
-                        height: 20.0,
-                      ),
+
 
                       //show discount badge
                       //price- after discount price

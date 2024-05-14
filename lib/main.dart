@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:green_docor_app/home_screen.dart';
+import 'package:green_docor_app/splash_screen.dart';
 
 
 Future<void> main() async
@@ -13,7 +14,7 @@ Future<void> main() async
   }
   catch(errorMsg)
   {
-    print("Error: $errorMsg");
+    print("Error:: " + errorMsg.toString());
   }
   runApp(const MyApp());
 }
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
-      home: const HomeScreen(),
+      home: const SplashScreen(),
     );
   }
 }

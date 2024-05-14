@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_docor_app/items.dart';
+import 'package:green_docor_app/virtual_ar_view_screen.dart';
 
 class ItemDetailsScreen extends StatefulWidget
 {
@@ -23,6 +24,24 @@ class _ItemDetailsScreenState extends State<ItemDetailsScreen>
         title: Text(
           widget.clickedItemInfo!.itemName.toString(),
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        backgroundColor: Colors.teal,
+        onPressed: ()
+        {
+          //try item virtually (arview)
+          Navigator.push(context, MaterialPageRoute(builder: (c)=>VirtualARViewScreen(
+            clickedItemImageLink: widget.clickedItemInfo!.itemImage.toString(),
+          )));
+        },
+        label: const Text(
+          "Try Virtually (AR View)",
+        ),
+        icon: const Icon(
+          Icons.mobile_screen_share_rounded,
+          color: Colors.white54,
+        ),
+
       ),
       body: SingleChildScrollView(
         child: Padding(
