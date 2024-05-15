@@ -25,9 +25,9 @@ class _SignInScreenState extends State<SignInScreen> {
             gradient: LinearGradient(
               colors: 
                 [
-                  hexStringToColor("003C43"),
+                  hexStringToColor("77B0AA"),
                   hexStringToColor("135D66"),
-                  hexStringToColor("77B0AA")
+                  hexStringToColor("003C43")
                 ],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,

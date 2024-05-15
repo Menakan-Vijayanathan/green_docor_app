@@ -35,9 +35,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       gradient: LinearGradient(
         colors:
         [
-          hexStringToColor("003C43"),
+          hexStringToColor("77B0AA"),
           hexStringToColor("135D66"),
-          hexStringToColor("77B0AA")
+          hexStringToColor("003C43")
         ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
@@ -56,7 +56,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               const SizedBox(
                 height: 20,
               ),
-              reusableTextField("Enter Email Id", Icons.person_outline, false, _passwordTextController),
+              reusableTextField("Enter Email Id", Icons.person_outline, false, _emailTextController),
               const SizedBox(
                 height: 20,
               ),
