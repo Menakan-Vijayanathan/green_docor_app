@@ -1,5 +1,5 @@
 Green Decor: AR Indoor Plant Scaping App (Flutter)
-This README.md file provides an introduction to the Green Decor mobile application, built using the Flutter framework. Green Decor leverages Augmented Reality (AR) technology to empower users to design their indoor spaces with beautiful and functional plant arrangements.
+Green Decor mobile application, built using the Flutter framework. Green Decor leverages Augmented Reality (AR) technology to empower users to design their indoor spaces with beautiful and functional plant arrangements.
 
 Project Overview
 

@@ -462,3 +462,4 @@ class _ItemsUploadScreenState extends State<ItemsUploadScreen>
     return imageFileUint8List == null ? defaultScreen() : uploadFormScreen();
   }
 }
+
