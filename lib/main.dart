@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:green_docor_app/home_screen.dart';
 import 'package:green_docor_app/splash_screen.dart';
+import 'package:green_docor_app/firebase_options.dart';
 
 
 Future<void> main() async
@@ -9,7 +10,7 @@ Future<void> main() async
   try
   {
     WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.android);
 
   }
   catch(errorMsg)
